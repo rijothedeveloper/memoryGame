@@ -107,7 +107,8 @@ function flipCard() {
       // flipped cards are asme
       if(div.classList[0] === flippedCard.classList[0]) {
         //keep the flip
-        
+        div.removeEventListener("click", handleCardClick);
+        flippedCard.removeEventListener("click", handleCardClick);
         working=false;
         score += 20;
         scorePara.innerText = score;
