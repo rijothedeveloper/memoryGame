@@ -60,27 +60,36 @@ function createDivsForColors(colorArray) {
 function flipCard() {
   let firstClick = true;
   let flippedCard;
+  let working = false;
   return function(div) {
+    if(working || div.clicked) {
+      return;
+    }
+    working = true;
     if(firstClick) {
       div.style.backgroundColor = div.classList[0];
       firstClick = false;
       flippedCard = div;
+      working = false;
+      div.clicked = true;
     } else {
       
       // flipped cards are asme
       if(div.classList[0] === flippedCard.classList[0]) {
         //keep the flip
         div.style.backgroundColor = div.classList[0];
+        working=false;
       } else {
         div.style.backgroundColor = div.classList[0];
         // flip both cards back after 2 seconds
         setTimeout (() => {
           flippedCard.style.backgroundColor = "white";
           div.style.backgroundColor = "white";
+          working = false;
         }, 2000);
       }
       firstClick = true;
-      //flippedCard = "";
+      flippedCard.clicked = false;
     }
   }
 }
