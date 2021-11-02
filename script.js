@@ -57,10 +57,42 @@ function createDivsForColors(colorArray) {
   }
 }
 
+function flipCard() {
+  let firstClick = true;
+  let flippedCard;
+  return function(div) {
+    if(firstClick) {
+      div.style.backgroundColor = div.classList[0];
+      firstClick = false;
+      flippedCard = div;
+    } else {
+      
+      // flipped cards are asme
+      if(div.classList[0] === flippedCard.classList[0]) {
+        //keep the flip
+        div.style.backgroundColor = div.classList[0];
+      } else {
+        div.style.backgroundColor = div.classList[0];
+        // flip both cards back after 2 seconds
+        setTimeout (() => {
+          flippedCard.style.backgroundColor = "white";
+          div.style.backgroundColor = "white";
+        }, 2000);
+      }
+      firstClick = true;
+      //flippedCard = "";
+    }
+  }
+}
+
+const flipsCards = flipCard();
+
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   console.log("you just clicked", event.target);
+  // flip the card
+  flipsCards(event.target);
 }
 
 // when the DOM loads
